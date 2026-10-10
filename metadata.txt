@@ -1,0 +1,47 @@
+[general]
+name=GraphExplorer Link for QGIS
+qgisMinimumVersion=3.28
+# Ohne diese Zeile nimmt QGIS als Obergrenze <major>.99 an, hier also 3.99 --
+# unter QGIS 4 gälte das Plugin damit als inkompatibel und würde nicht einmal
+# zum Aktivieren angeboten.
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Links QGIS vector layers to the GraphExplorer: select a feature in the map and the GraphExplorer shows its node; select a node in the GraphExplorer and the features light up in QGIS. Values from the graph can be written into the attribute table.
+version=1.0.0
+author=Brigit Danthine, Austrian Archaeological Institute (Austrian Academy of Sciences)
+email=brigit.danthine@oeaw.ac.at
+
+about=Connects a vector layer to the nodes of a knowledge graph through a
+    configurable join key (e.g. the field "SE" against a node property). The
+    GraphExplorer (https://github.com/oeai-dac/GraphExplorer) runs in your
+    browser; this plugin opens a local connection that the GraphExplorer joins
+    via "Connect QGIS / Blender". Both directions are live: click a geometry
+    to see its node, click a node in the Explorer, Harris matrix or timeline to
+    highlight its features. A match report shows which keys find each other and
+    which do not. Values from the graph -- node properties, but also what hangs
+    one connection further, such as the number of finds of a unit or their
+    material -- can be transferred into the attribute table: put together by
+    drag and drop, written after a preview, undoable through the layer's edit
+    buffer. Needs only QtWebSockets, which ships with QGIS. No data leaves your
+    computer.
+
+tracker=https://github.com/oeai-dac/GraphExplorer-QGIS/issues
+repository=https://github.com/oeai-dac/GraphExplorer-QGIS
+homepage=https://github.com/oeai-dac/GraphExplorer-QGIS
+
+changelog=1.0.0
+    - First public release.
+    - Connects to a running GraphExplorer ("Connect QGIS / Blender") instead of
+      shipping its own copy -- one GraphExplorer for QGIS and Blender.
+    - English user interface.
+    - Node types, properties and relations are shown under the same names as in
+      the GraphExplorer (needs GraphExplorer interface version 3; older
+      versions get shortened keys).
+    - Transfer templates: save and delete named sets of columns explicitly.
+
+tags=knowledge graph,graph,rdf,linked data,cidoc crm,archaeology,attribute table,join,selection
+category=Plugins
+icon=icon.png
+experimental=False
+deprecated=False
+hasProcessingProvider=no
