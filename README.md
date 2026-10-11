@@ -32,12 +32,12 @@ Excavation data usually lives in several places — this plugin connects two of 
 - **Click on a linked node in the GraphExplorer** — in its lists, the Harris matrix or the timeline etc. → the linked geometry is selected in QGIS.
 - **Copy values from the graph into the attribute table** — for example the number of finds per unit, or the interpretation — and use them to style, label or analyse your data further.
 
-The graph itself is shown in the **[GraphExplorer](https://github.com/oeai-dac/GraphExplorer)**, a free tool that runs in your web browser. This plugin connects QGIS to it. The same GraphExplorer can be connected to **[GraphExplorer Link for Blender](https://github.com/oeai-dac/GraphExplorer-Blender)** at the same time, so a click in one of the three programs updates the other two.
+The graph itself is shown in the **[GraphExplorer](https://github.com/oeai-dac/GraphExplorer)**, a free tool that runs in your web browser. This plugin connects QGIS to it. The same GraphExplorer can be connected to other applications at the same time — such as Blender or CloudCompare with **[GraphExplorer Link for Blender](https://github.com/oeai-dac/GraphExplorer_Blender)** and **[GraphExplorer Link for CloudCompare](https://github.com/oeai-dac/GraphExplorer_CloudCompare)** — so a click in one program updates all the others.
 
 ```mermaid
 flowchart LR
     Q["QGIS<br/>with GraphExplorer Link for QGIS"] <-- "selection<br/>both ways" --> G["GraphExplorer<br/>in the browser"]
-    B["Blender<br/>with GraphExplorer Link for Blender"] <-. "optional" .-> G
+    O["Other applications<br/>e.g. Blender · CloudCompare"] <-. "optional" .-> G
     G -- "values for the<br/>attribute table" --> Q
 ```
 
@@ -47,7 +47,7 @@ flowchart LR
 
 - **Selection in both directions** — map → graph and graph → map, live
 - **Works with your field names** — any layer field can be matched against a property, the name or the ID of the nodes
-- **Forgiving matching** — ignores upper/lower case and extra spaces; can also match `SE 2001` with `2001`, or pick the number out of names like `EDP22-SE2004`
+- **Forgiving matching** — ignores upper/lower case and extra spaces; can also match `SE 2001` with `2001`, or pick the number out of names like `T2_SE2004`
 - **Match report** — shows which units appear in both, which only in the layer and which only in the graph
 - **Clever selection** — click a find in the GraphExplorer, and QGIS selects the unit it was found in
 - **Values into the attribute table** — properties of the nodes, but also what is connected to them: the number of finds in a unit, their names, their weight
@@ -68,7 +68,7 @@ flowchart LR
 
 **From QGIS** (once published in the QGIS plugin repository): *Plugins → Manage and Install Plugins…*, search for **GraphExplorer Link for QGIS**, click *Install Plugin*.
 
-**From a ZIP file:** download `graphexplorer_link-<version>.zip` from the [Releases](https://github.com/oeai-dac/GraphExplorer-QGIS/releases) page. In QGIS, open *Plugins → Manage and Install Plugins… → Install from ZIP*, choose the file and click *Install Plugin*.
+**From a ZIP file:** download `graphexplorer_link-<version>.zip` from the [Releases](https://github.com/oeai-dac/GraphExplorer_QGIS/releases) page. In QGIS, open *Plugins → Manage and Install Plugins… → Install from ZIP*, choose the file and click *Install Plugin*.
 
 After installing, you will find the button <img src="icon.svg" alt="" width="16"> **GraphExplorer Link for QGIS** in the toolbar and in the menu *Plugins → GraphExplorer*.
 
@@ -103,13 +103,13 @@ In QGIS, click <img src="icon.svg" alt="" width="16"> **GraphExplorer Link for Q
 | Element | What it does |
 |---|---|
 | **Not connected / Connected to the GraphExplorer** | Shows whether the GraphExplorer is connected. While it is not, the panel shows the three steps to connect. |
-| **Copy connection address** | Copies the address you paste into the GraphExplorer under *Connect QGIS / Blender*. |
+| **Copy connection address** | Copies the address you paste into the GraphExplorer under *Connect application*. |
 | **Load graph …** | Opens a graph JSON file in the connected GraphExplorer. Optional — you can also open the graph in the GraphExplorer itself. |
 | **Links …** | Sets up which layer field belongs to which nodes in the graph ([step 4](#4-link-the-geometries-in-qgis-with-the-nodes-in-the-graphexplorer)). |
 | **Transfer values …** | Copies values from the graph into the attribute table of a layer ([step 5](#5-transfer-values-into-the-attribute-table)). |
 | **Zoom to selection** | When something is selected in the GraphExplorer, the map zooms to it. |
 
-To connect, click **Copy connection address**. Then, in the GraphExplorer, click **Connect QGIS / Blender** at the bottom left, paste the address and click **Connect**.
+To connect, click **Copy connection address**. Then, in the GraphExplorer, click **Connect application** at the bottom left, paste the address and click **Connect**.
 
 The panel in QGIS now says **Connected to the GraphExplorer**.
 
@@ -165,8 +165,8 @@ The values in your layer and in the graph are often written slightly differently
 | **Trim** | Only spaces at the beginning and end are ignored |
 | **Exact** | Every character must match |
 | **Digits only** | Only the number counts: `SE 2001` matches `2001`. Values with *several* numbers (`Trench 3, SE 2001`) are left out on purpose — guessing could connect a find with the wrong unit. |
-| **Last number** | Takes the last number: `EDP22-SE2004` matches `2004` — useful when the campaign is written in front |
-| **Pattern** | A regular expression of your own; the part in brackets is compared. The default `SE[\s_-]*(\d+)` finds the number in `SE2004`, `SE 2004`, `SE-2004`, `se_2004` and `EDP22-SE2004` |
+| **Last number** | Takes the last number: `T2_SE2004` matches `2004` — useful when the trench is written in front |
+| **Pattern** | A regular expression of your own; the part in brackets is compared. The default `SE[\s_-]*(\d+)` finds the number in `SE2004`, `SE 2004`, `SE-2004`, `se_2004` and `T2_SE2004` |
 
 #### What happens when you click
 
@@ -224,9 +224,9 @@ An arrow → means a connection going out from the node, ← one coming in. The 
 
 If you transfer the same columns regularly, save them as a **template**: click **Save …** next to *Use settings from* and give it a name. The template stores the layer, the key and the columns, and is saved in the project. Next time, choose it under *Use settings from*. Saving under an existing name replaces that template (the plugin asks first); **Delete** removes the selected template. Nothing is saved automatically.
 
-### QGIS and Blender at the same time
+### Several applications at the same time
 
-The GraphExplorer can be connected to QGIS and to Blender (with [GraphExplorer Link for Blender](https://github.com/oeai-dac/GraphExplorer-Blender)) at the same time. Click a 3D body in Blender, and the GraphExplorer opens the unit while QGIS selects its polygon — and the other way round. Copy the connection address in each program and paste both into the GraphExplorer (*Connect QGIS / Blender*, then *Connect another application*). The example data includes a matching 3D model for Blender.
+The GraphExplorer can be connected to several applications at the same time — for example QGIS, Blender (with [GraphExplorer Link for Blender](https://github.com/oeai-dac/GraphExplorer_Blender)) and CloudCompare (with [GraphExplorer Link for CloudCompare](https://github.com/oeai-dac/GraphExplorer_CloudCompare)). Click a 3D body in Blender or CloudCompare, and the GraphExplorer opens the unit while QGIS selects its polygon — and the other way round. Copy the connection address in each program and paste them all into the GraphExplorer (*Connect application*, then *Connect another application*). The example data includes a matching 3D model for Blender and CloudCompare.
 
 ### What is saved where
 
@@ -269,7 +269,7 @@ In QGIS under *View → Panels → Log Messages*, tab *GraphExplorer Link for QG
 
 ### Why the GraphExplorer runs in the browser
 
-QGIS on Windows does not ship QtWebEngine, and QtWebKit is too old for the GraphExplorer. What every QGIS installation has is **QtWebSockets**. So the plugin runs a small WebSocket server on `127.0.0.1`, and the GraphExplorer — the bridge is built into it (`src/explorer-bridge.js`) — connects to it. A WebSocket is always opened by the browser; the applications are the servers. This is also why QGIS and Blender can share one GraphExplorer without depending on each other.
+QGIS on Windows does not ship QtWebEngine, and QtWebKit is too old for the GraphExplorer. What every QGIS installation has is **QtWebSockets**. So the plugin runs a small WebSocket server on `127.0.0.1`, and the GraphExplorer — the bridge is built into it (`src/explorer-bridge.js`) — connects to it. A WebSocket is always opened by the browser; the applications are the servers. This is also why several applications — such as QGIS, Blender and CloudCompare — can share one GraphExplorer without depending on each other.
 
 ### Protocol
 
@@ -300,7 +300,7 @@ layer.selectionChanged
 
 ### Interface version
 
-On connecting, the GraphExplorer reports an interface version (`API_VERSION` in its `src/main.jsx`). The plugin checks for **at least** the version it needs (currently 2; version 3 adds the display names), not for exactly that version: the bridge gains methods but never loses any, and since QGIS and Blender can share one GraphExplorer, an equality check would turn every extension for one into a failure for the other.
+On connecting, the GraphExplorer reports an interface version (`API_VERSION` in its `src/main.jsx`). The plugin checks for **at least** the version it needs (currently 2; version 3 adds the display names), not for exactly that version: the bridge gains methods but never loses any, and since several applications can share one GraphExplorer, an equality check would turn every extension for one into a failure for the others.
 
 ### Access token
 
@@ -325,7 +325,7 @@ cd "%APPDATA%\QGIS\QGIS3\profiles\default\python\plugins"
 # Linux:  ~/.local/share/QGIS/QGIS3/profiles/default/python/plugins
 # macOS:  ~/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins
 
-git clone https://github.com/oeai-dac/GraphExplorer-QGIS.git graphexplorer_link
+git clone https://github.com/oeai-dac/GraphExplorer_QGIS.git graphexplorer_link
 ```
 
 Restart QGIS and enable the plugin under *Plugins → Manage and Install Plugins… → Installed*. After changing the code, restart QGIS — the Plugin Reloader does not always reload all modules.
@@ -339,7 +339,7 @@ python scripts/make-zip.py      # writes dist/graphexplorer_link-<version>.zip
 ### Project structure
 
 ```
-GraphExplorer-QGIS/
+GraphExplorer_QGIS/
 ├── __init__.py          classFactory for QGIS
 ├── plugin.py            menu, toolbar, lifetime of the panel
 ├── dock.py              the panel: controls and status

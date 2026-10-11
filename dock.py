@@ -3,7 +3,7 @@
 Der Explorer selbst ist der GraphExplorer im Browser -- derselbe, mit dem auch
 sonst gearbeitet wird. Das Plugin bringt keinen eigenen mit, sondern hält nur
 die Leitung (``wsserver.py``): Die Adresse wird hier kopiert und im
-GraphExplorer unten links unter "Connect QGIS / Blender" eingefügt. Damit gibt
+GraphExplorer unten links unter "Connect application" eingefügt. Damit gibt
 es genau einen Explorer, und ein Update des GraphExplorers wirkt sofort auch
 für QGIS -- ohne dass das Plugin mitziehen muss.
 
@@ -57,7 +57,7 @@ HOW_TO_CONNECT = (
     "<ol style='margin-left:-20px'>"
     "<li>Open the <a href='%s'>GraphExplorer</a> in your browser.</li>"
     "<li>Click <b>Copy connection address</b> below.</li>"
-    "<li>In the GraphExplorer, click <b>Connect QGIS / Blender</b> at the "
+    "<li>In the GraphExplorer, click <b>Connect application</b> at the "
     "bottom left, paste the address and click <b>Connect</b>.</li>"
     "</ol>"
 ) % GRAPHEXPLORER_URL
@@ -89,7 +89,7 @@ class GraphExplorerDock(QDockWidget):
         self.btn_copy = QPushButton("Copy connection address")
         self.btn_copy.setToolTip(
             "Copies the address of this QGIS session. Paste it in the "
-            "GraphExplorer under \"Connect QGIS / Blender\" (bottom left)."
+            "GraphExplorer under \"Connect application\" (bottom left)."
         )
         self.btn_copy.clicked.connect(self.copy_address)
         layout.addWidget(self.btn_copy)
@@ -211,7 +211,7 @@ class GraphExplorerDock(QDockWidget):
             self.set_status("Address copied. The GraphExplorer is already connected.")
         else:
             self.set_status("Address copied. Now paste it in the GraphExplorer under "
-                            "\"Connect QGIS / Blender\" (bottom left).")
+                            "\"Connect application\" (bottom left).")
 
     def choose_graph(self):
         start_dir = os.path.dirname(settings.read_graph_path() or "")

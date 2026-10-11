@@ -15,7 +15,7 @@ about=Connects a vector layer to the nodes of a knowledge graph through a
     configurable join key (e.g. the field "SE" against a node property). The
     GraphExplorer (https://github.com/oeai-dac/GraphExplorer) runs in your
     browser; this plugin opens a local connection that the GraphExplorer joins
-    via "Connect QGIS / Blender". Both directions are live: click a geometry
+    via "Connect application". Both directions are live: click a geometry
     to see its node, click a node in the Explorer, Harris matrix or timeline to
     highlight its features. A match report shows which keys find each other and
     which do not. Values from the graph -- node properties, but also what hangs
@@ -25,9 +25,9 @@ about=Connects a vector layer to the nodes of a knowledge graph through a
     buffer. Needs only QtWebSockets, which ships with QGIS. No data leaves your
     computer.
 
-tracker=https://github.com/oeai-dac/GraphExplorer-QGIS/issues
-repository=https://github.com/oeai-dac/GraphExplorer-QGIS
-homepage=https://github.com/oeai-dac/GraphExplorer-QGIS
+tracker=https://github.com/oeai-dac/GraphExplorer_QGIS/issues
+repository=https://github.com/oeai-dac/GraphExplorer_QGIS
+homepage=https://github.com/oeai-dac/GraphExplorer_QGIS
 
 changelog=1.0.0
     - First public release.

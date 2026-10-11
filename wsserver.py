@@ -3,7 +3,7 @@
 Das Plugin bringt keinen eigenen Explorer mit. Es lauscht hier auf einem
 lokalen Port; der GraphExplorer -- gleich, ob aus ``START-Graph-Explorer.bat``,
 als Standalone-Datei oder von einem Webserver -- baut die Verbindung auf,
-sobald jemand die Adresse unten links unter "Connect QGIS / Blender" einfügt.
+sobald jemand die Adresse unten links unter "Connect application" einfügt.
 Ein WebSocket geht immer vom Browser aus; die Anwendungen sind die Server. So
 können QGIS und Blender gleichzeitig an *einem* Explorer hängen, ohne dass eine
 Anwendung von der anderen abhängt.

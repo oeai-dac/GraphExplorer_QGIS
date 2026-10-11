@@ -263,11 +263,11 @@ check("Zahl in einer Textspalte ohne .0", text_zahl.values[1][0], "3")
 # -- Die Normalisierung gilt auf beiden Seiten -------------------------------
 #
 # Dieselbe Falle wie bei der Auswahl-Kopplung: Bei "Muster" ist die
-# Normalisierung nicht wiederholbar. Aus "EDP22-SE2004" wird "2004", und darin
+# Normalisierung nicht wiederholbar. Aus "T2_SE2004" wird "2004", und darin
 # findet das Muster nichts mehr. Die Layer-Seite ist beim Aufbau des Index schon
 # normalisiert; nur die Graph-Seite darf hier noch durch.
 muster = build_transfer(
-    indexed([(1, "EDP22-SE2004")], NORMALIZE_PATTERN, r"SE[\s_-]*(\d+)"),
+    indexed([(1, "T2_SE2004")], NORMALIZE_PATTERN, r"SE[\s_-]*(\d+)"),
     [ValueColumn(ATTR, field="ansprache", kind=KIND_TEXT)],
     [{"id": "B_1", "key": "SE 2004", "values": ["Grube"]}],
     )
